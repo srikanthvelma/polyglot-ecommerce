@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: auth-db
+  namespace: polyglot-shop
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: auth-db
+  template:
+    metadata:
+      labels:
+        app: auth-db
+    spec:
+      containers:
+        - name: auth-db
+          image: mongo:6
+          ports:
+            - containerPort: 27017
+          volumeMounts:
+            - name: auth-db-storage
+              mountPath: /data/db
+      volumes:
+        - name: auth-db-storage
+          emptyDir: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: auth-db
+  namespace: polyglot-shop
+spec:
+  selector:
+    app: auth-db
+  ports:
+    - port: 27017
+      targetPort: 27017
+  type: ClusterIP

@@ -1,0 +1,66 @@
+[
+  {
+    "id": "p001",
+    "name": "Wireless Mouse",
+    "description": "Ergonomic wireless mouse with USB receiver",
+    "price": 15.99,
+    "category": "Electronics",
+    "stock": 120
+  },
+  {
+    "id": "p002",
+    "name": "Mechanical Keyboard",
+    "description": "RGB backlit mechanical keyboard",
+    "price": 45.50,
+    "category": "Electronics",
+    "stock": 60
+  },
+  {
+    "id": "p003",
+    "name": "Running Shoes",
+    "description": "Lightweight running shoes for men and women",
+    "price": 65.00,
+    "category": "Footwear",
+    "stock": 80
+  },
+  {
+    "id": "p004",
+    "name": "Noise Cancelling Headphones",
+    "description": "Over-ear wireless headphones with active noise cancellation",
+    "price": 120.00,
+    "category": "Electronics",
+    "stock": 45
+  },
+  {
+    "id": "p005",
+    "name": "Smartphone Stand",
+    "description": "Adjustable desktop stand for smartphones and tablets",
+    "price": 12.99,
+    "category": "Accessories",
+    "stock": 200
+  },
+  {
+    "id": "p006",
+    "name": "Coffee Mug",
+    "description": "Ceramic coffee mug with heat-sensitive design",
+    "price": 9.99,
+    "category": "Home & Kitchen",
+    "stock": 150
+  },
+  {
+    "id": "p007",
+    "name": "Fitness Tracker",
+    "description": "Water-resistant fitness tracker with heart rate monitor",
+    "price": 55.00,
+    "category": "Electronics",
+    "stock": 70
+  },
+  {
+    "id": "p008",
+    "name": "LED Desk Lamp",
+    "description": "Dimmable LED desk lamp with USB charging port",
+    "price": 25.50,
+    "category": "Home & Kitchen",
+    "stock": 95
+  }
+]

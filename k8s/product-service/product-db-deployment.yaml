@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: product-db
+  namespace: polyglot-shop
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: product-db
+  template:
+    metadata:
+      labels:
+        app: product-db
+    spec:
+      containers:
+        - name: product-db
+          image: mysql:8
+          env:
+            - name: MYSQL_ROOT_PASSWORD
+              value: rootpass
+            - name: MYSQL_DATABASE
+              value: productdb
+            - name: MYSQL_USER
+              value: productuser
+            - name: MYSQL_PASSWORD
+              value: productpass
+          ports:
+            - containerPort: 3306
+          volumeMounts:
+            - name: product-db-storage
+              mountPath: /var/lib/mysql
+      volumes:
+        - name: product-db-storage
+          emptyDir: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: product-db
+  namespace: polyglot-shop
+spec:
+  selector:
+    app: product-db
+  ports:
+    - port: 3306
+      targetPort: 3306
+  type: ClusterIP

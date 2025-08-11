@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: shipping-db
+  namespace: polyglot-shop
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: shipping-db
+  template:
+    metadata:
+      labels:
+        app: shipping-db
+    spec:
+      containers:
+        - name: shipping-db
+          image: mysql:8
+          env:
+            - name: MYSQL_ROOT_PASSWORD
+              value: rootpass
+            - name: MYSQL_DATABASE
+              value: shippingdb
+            - name: MYSQL_USER
+              value: shippinguser
+            - name: MYSQL_PASSWORD
+              value: shippingpass
+          ports:
+            - containerPort: 3306
+          volumeMounts:
+            - name: shipping-db-storage
+              mountPath: /var/lib/mysql
+      volumes:
+        - name: shipping-db-storage
+          emptyDir: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: shipping-db
+  namespace: polyglot-shop
+spec:
+  selector:
+    app: shipping-db
+  ports:
+    - port: 3306
+      targetPort: 3306
+  type: ClusterIP

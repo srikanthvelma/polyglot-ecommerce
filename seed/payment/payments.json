@@ -1,0 +1,92 @@
+[
+  {
+    "payment_id": "PMT100001",
+    "order_id": 1,
+    "amount": 1299.99,
+    "currency": "USD",
+    "status": "Completed",
+    "method": "Credit Card",
+    "timestamp": "2024-03-01T10:15:00Z"
+  },
+  {
+    "payment_id": "PMT100002",
+    "order_id": 2,
+    "amount": 999.50,
+    "currency": "USD",
+    "status": "Pending",
+    "method": "PayPal",
+    "timestamp": "2024-03-02T12:30:00Z"
+  },
+  {
+    "payment_id": "PMT100003",
+    "order_id": 3,
+    "amount": 259.75,
+    "currency": "USD",
+    "status": "Completed",
+    "method": "Debit Card",
+    "timestamp": "2024-03-02T14:45:00Z"
+  },
+  {
+    "payment_id": "PMT100004",
+    "order_id": 4,
+    "amount": 749.00,
+    "currency": "USD",
+    "status": "Failed",
+    "method": "Credit Card",
+    "timestamp": "2024-03-03T09:00:00Z"
+  },
+  {
+    "payment_id": "PMT100005",
+    "order_id": 5,
+    "amount": 299.99,
+    "currency": "USD",
+    "status": "Completed",
+    "method": "UPI",
+    "timestamp": "2024-03-03T15:20:00Z"
+  },
+  {
+    "payment_id": "PMT100006",
+    "order_id": 6,
+    "amount": 159.99,
+    "currency": "USD",
+    "status": "Completed",
+    "method": "Credit Card",
+    "timestamp": "2024-03-04T08:00:00Z"
+  },
+  {
+    "payment_id": "PMT100007",
+    "order_id": 7,
+    "amount": 699.00,
+    "currency": "USD",
+    "status": "Pending",
+    "method": "PayPal",
+    "timestamp": "2024-03-04T13:10:00Z"
+  },
+  {
+    "payment_id": "PMT100008",
+    "order_id": 8,
+    "amount": 89.99,
+    "currency": "USD",
+    "status": "Completed",
+    "method": "Debit Card",
+    "timestamp": "2024-03-05T16:25:00Z"
+  },
+  {
+    "payment_id": "PMT100009",
+    "order_id": 9,
+    "amount": 499.99,
+    "currency": "USD",
+    "status": "Completed",
+    "method": "UPI",
+    "timestamp": "2024-03-05T18:40:00Z"
+  },
+  {
+    "payment_id": "PMT100010",
+    "order_id": 10,
+    "amount": 1249.00,
+    "currency": "USD",
+    "status": "Failed",
+    "method": "Credit Card",
+    "timestamp": "2024-03-06T11:55:00Z"
+  }
+]

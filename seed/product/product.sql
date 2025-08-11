@@ -1,0 +1,36 @@
+CREATE TABLE IF NOT EXISTS products (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    description TEXT,
+    category VARCHAR(100),
+    price DECIMAL(10, 2),
+    stock INT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+INSERT INTO products (name, description, category, price, stock) VALUES
+('Apple iPhone 14', 'Latest Apple iPhone with A15 Bionic chip and advanced dual-camera system.', 'Electronics', 999.99, 50),
+('Samsung Galaxy S22', 'Flagship Samsung smartphone with AMOLED display and triple camera.', 'Electronics', 899.99, 45),
+('Sony WH-1000XM4 Headphones', 'Noise cancelling wireless over-ear headphones with premium sound.', 'Electronics', 349.99, 60),
+('Dell XPS 13 Laptop', 'Ultra-portable laptop with 11th Gen Intel i7 processor and 16GB RAM.', 'Electronics', 1299.99, 20),
+('Nike Air Max 270', 'Comfortable sneakers with a large Air unit for extra cushioning.', 'Footwear', 150.00, 100),
+('Adidas Ultraboost 22', 'High-performance running shoes with responsive cushioning.', 'Footwear', 180.00, 90),
+('Levi’s 501 Original Jeans', 'Classic straight-leg jeans made from premium denim.', 'Clothing', 69.99, 75),
+('Ralph Lauren Polo Shirt', 'Iconic polo shirt crafted from breathable cotton.', 'Clothing', 89.99, 65),
+('The Alchemist by Paulo Coelho', 'Bestselling novel about following your dreams.', 'Books', 14.99, 120),
+('Atomic Habits by James Clear', 'Practical guide to building good habits and breaking bad ones.', 'Books', 21.99, 80),
+('Dyson V11 Vacuum Cleaner', 'Powerful cordless vacuum with intelligent suction control.', 'Home Appliances', 599.99, 30),
+('Instant Pot Duo 7-in-1', 'Multi-use pressure cooker for fast and easy meals.', 'Home Appliances', 99.99, 55),
+('Logitech MX Master 3 Mouse', 'Ergonomic wireless mouse with ultra-fast scrolling.', 'Electronics', 99.99, 70),
+('Kindle Paperwhite', 'E-reader with high-resolution display and adjustable warm light.', 'Electronics', 139.99, 85),
+('Samsung 55" QLED TV', '4K UHD Smart TV with Quantum Dot technology.', 'Electronics', 799.99, 40),
+('Apple AirPods Pro', 'Wireless earbuds with active noise cancellation.', 'Electronics', 249.99, 95),
+('Herman Miller Aeron Chair', 'Ergonomic office chair with adjustable lumbar support.', 'Furniture', 1395.00, 15),
+('IKEA MALM Bed Frame', 'Queen-size bed frame with clean, modern design.', 'Furniture', 249.00, 25),
+('Cuisinart Chef’s Knife', '8-inch stainless steel chef’s knife for everyday cooking.', 'Kitchen', 39.99, 110),
+('Nespresso VertuoPlus Coffee Maker', 'Single-serve coffee machine with centrifugal brewing.', 'Kitchen', 179.99, 50),
+('Google Pixel 7', 'Google flagship phone with Tensor G2 chip.', 'Electronics', 799.99, 35),
+('Fitbit Charge 5', 'Advanced fitness tracker with built-in GPS.', 'Wearables', 149.95, 70),
+('Oculus Quest 2', 'All-in-one VR headset with immersive experiences.', 'Electronics', 299.99, 55),
+('Canon EOS R6 Camera', 'Full-frame mirrorless camera with 20MP sensor.', 'Electronics', 2499.00, 10),
+('Bose SoundLink Revolve+', 'Portable Bluetooth speaker with deep, loud sound.', 'Electronics', 299.00, 65);

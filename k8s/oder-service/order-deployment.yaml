@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: order-service
+  namespace: polyglot-shop
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: order-service
+  template:
+    metadata:
+      labels:
+        app: order-service
+    spec:
+      containers:
+        - name: order-service
+          image: polyglot-shop/order-service:latest
+          ports:
+            - containerPort: 8003
+          envFrom:
+            - configMapRef:
+                name: order-service-config
+            - secretRef:
+                name: order-service-secret
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: order-service
+  namespace: polyglot-shop
+spec:
+  selector:
+    app: order-service
+  ports:
+    - port: 8003
+      targetPort: 8003
+  type: ClusterIP

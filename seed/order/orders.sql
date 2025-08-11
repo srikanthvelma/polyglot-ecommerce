@@ -1,0 +1,35 @@
+CREATE TABLE IF NOT EXISTS orders (
+    id SERIAL PRIMARY KEY,
+    user_id INT NOT NULL,
+    product_id INT NOT NULL,
+    quantity INT NOT NULL,
+    status VARCHAR(50) NOT NULL,
+    order_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+INSERT INTO orders (user_id, product_id, quantity, status, order_date) VALUES
+(1, 3, 1, 'Shipped', '2024-03-01 10:15:00'),
+(2, 5, 2, 'Pending', '2024-03-02 14:30:00'),
+(3, 8, 1, 'Delivered', '2024-03-03 09:45:00'),
+(4, 12, 1, 'Shipped', '2024-03-04 16:20:00'),
+(5, 1, 1, 'Pending', '2024-03-05 11:05:00'),
+(6, 7, 2, 'Delivered', '2024-03-06 13:50:00'),
+(7, 14, 1, 'Pending', '2024-03-07 08:25:00'),
+(8, 2, 1, 'Shipped', '2024-03-08 15:40:00'),
+(9, 10, 3, 'Delivered', '2024-03-09 10:10:00'),
+(10, 4, 1, 'Pending', '2024-03-10 17:55:00'),
+(11, 16, 2, 'Shipped', '2024-03-11 12:35:00'),
+(12, 19, 1, 'Delivered', '2024-03-12 14:00:00'),
+(13, 6, 1, 'Pending', '2024-03-13 09:20:00'),
+(14, 11, 2, 'Shipped', '2024-03-14 16:15:00'),
+(15, 20, 1, 'Delivered', '2024-03-15 08:40:00'),
+(16, 22, 1, 'Pending', '2024-03-16 13:30:00'),
+(17, 9, 1, 'Shipped', '2024-03-17 11:45:00'),
+(18, 17, 3, 'Delivered', '2024-03-18 10:05:00'),
+(19, 13, 2, 'Pending', '2024-03-19 15:25:00'),
+(20, 15, 1, 'Shipped', '2024-03-20 09:50:00'),
+(21, 23, 1, 'Pending', '2024-03-21 14:15:00'),
+(22, 21, 2, 'Delivered', '2024-03-22 12:10:00'),
+(23, 24, 1, 'Shipped', '2024-03-23 10:55:00'),
+(24, 18, 1, 'Delivered', '2024-03-24 08:35:00'),
+(25, 25, 2, 'Pending', '2024-03-25 16:45:00');

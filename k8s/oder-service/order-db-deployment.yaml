@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: order-db
+  namespace: polyglot-shop
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: order-db
+  template:
+    metadata:
+      labels:
+        app: order-db
+    spec:
+      containers:
+        - name: order-db
+          image: postgres:15
+          env:
+            - name: POSTGRES_DB
+              value: orderdb
+            - name: POSTGRES_USER
+              value: orderuser
+            - name: POSTGRES_PASSWORD
+              value: orderpass
+          ports:
+            - containerPort: 5432
+          volumeMounts:
+            - name: order-db-storage
+              mountPath: /var/lib/postgresql/data
+      volumes:
+        - name: order-db-storage
+          emptyDir: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: order-db
+  namespace: polyglot-shop
+spec:
+  selector:
+    app: order-db
+  ports:
+    - port: 5432
+      targetPort: 5432
+  type: ClusterIP

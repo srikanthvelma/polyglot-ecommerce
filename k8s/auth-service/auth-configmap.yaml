@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: auth-service-config
+  namespace: polyglot-shop
+data:
+  MONGO_URI: mongodb://auth-db:27017/authdb
+

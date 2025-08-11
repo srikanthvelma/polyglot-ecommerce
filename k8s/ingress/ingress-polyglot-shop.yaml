@@ -1,0 +1,55 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: polyglot-shop-ingress
+  namespace: polyglot-shop
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/rewrite-target: /$1
+spec:
+  rules:
+    - host: polyglot-shop.local
+      http:
+        paths:
+          - path: /auth/?(.*)
+            pathType: Prefix
+            backend:
+              service:
+                name: auth-service
+                port:
+                  number: 8001
+          - path: /product/?(.*)
+            pathType: Prefix
+            backend:
+              service:
+                name: product-service
+                port:
+                  number: 8002
+          - path: /order/?(.*)
+            pathType: Prefix
+            backend:
+              service:
+                name: order-service
+                port:
+                  number: 8003
+          - path: /payment/?(.*)
+            pathType: Prefix
+            backend:
+              service:
+                name: payment-service
+                port:
+                  number: 8004
+          - path: /shipping/?(.*)
+            pathType: Prefix
+            backend:
+              service:
+                name: shipping-service
+                port:
+                  number: 8005
+          - path: /inventory/?(.*)
+            pathType: Prefix
+            backend:
+              service:
+                name: inventory-service
+                port:
+                  number: 8006

@@ -1,0 +1,35 @@
+CREATE TABLE IF NOT EXISTS shipments (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    order_id INT NOT NULL,
+    tracking_number VARCHAR(50) NOT NULL,
+    carrier VARCHAR(50) NOT NULL,
+    status VARCHAR(50) NOT NULL,
+    estimated_delivery DATE NOT NULL
+);
+
+INSERT INTO shipments (order_id, tracking_number, carrier, status, estimated_delivery) VALUES
+(1, 'TRK100001', 'FedEx', 'In Transit', '2024-03-05'),
+(2, 'TRK100002', 'UPS', 'Pending Pickup', '2024-03-06'),
+(3, 'TRK100003', 'USPS', 'Delivered', '2024-03-03'),
+(4, 'TRK100004', 'DHL', 'In Transit', '2024-03-08'),
+(5, 'TRK100005', 'FedEx', 'Pending Pickup', '2024-03-09'),
+(6, 'TRK100006', 'UPS', 'Delivered', '2024-03-06'),
+(7, 'TRK100007', 'USPS', 'In Transit', '2024-03-07'),
+(8, 'TRK100008', 'DHL', 'Delivered', '2024-03-09'),
+(9, 'TRK100009', 'FedEx', 'Pending Pickup', '2024-03-10'),
+(10, 'TRK100010', 'UPS', 'Delivered', '2024-03-08'),
+(11, 'TRK100011', 'USPS', 'In Transit', '2024-03-11'),
+(12, 'TRK100012', 'DHL', 'Delivered', '2024-03-09'),
+(13, 'TRK100013', 'FedEx', 'Pending Pickup', '2024-03-12'),
+(14, 'TRK100014', 'UPS', 'In Transit', '2024-03-13'),
+(15, 'TRK100015', 'USPS', 'Delivered', '2024-03-11'),
+(16, 'TRK100016', 'DHL', 'Pending Pickup', '2024-03-14'),
+(17, 'TRK100017', 'FedEx', 'In Transit', '2024-03-15'),
+(18, 'TRK100018', 'UPS', 'Delivered', '2024-03-12'),
+(19, 'TRK100019', 'USPS', 'In Transit', '2024-03-14'),
+(20, 'TRK100020', 'DHL', 'Delivered', '2024-03-13'),
+(21, 'TRK100021', 'FedEx', 'Pending Pickup', '2024-03-15'),
+(22, 'TRK100022', 'UPS', 'In Transit', '2024-03-16'),
+(23, 'TRK100023', 'USPS', 'Delivered', '2024-03-14'),
+(24, 'TRK100024', 'DHL', 'In Transit', '2024-03-17'),
+(25, 'TRK100025', 'FedEx', 'Pending Pickup', '2024-03-18');

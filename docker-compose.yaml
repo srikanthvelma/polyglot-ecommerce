@@ -1,0 +1,189 @@
+version: "3.9"
+
+networks:
+  polyglot-net:
+
+services:
+  # ========== AUTH SERVICE ==========
+  auth-db:
+    image: mongo:6
+    container_name: auth-db
+    networks:
+      - polyglot-net
+    volumes:
+      - auth-db-data:/data/db
+    ports:
+      - "27017:27017"
+
+  auth-service:
+    build: ./services/auth-service
+    image: polyglot-shop/auth-service:latest
+    container_name: auth-service
+    depends_on:
+      - auth-db
+    networks:
+      - polyglot-net
+    environment:
+      MONGO_URI: mongodb://auth-db:27017/authdb
+      JWT_SECRET: supersecret
+    ports:
+      - "8001:8001"
+
+  # ========== PRODUCT SERVICE ==========
+  product-db:
+    image: mysql:8
+    container_name: product-db
+    networks:
+      - polyglot-net
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpass
+      MYSQL_DATABASE: productdb
+      MYSQL_USER: productuser
+      MYSQL_PASSWORD: productpass
+    volumes:
+      - product-db-data:/var/lib/mysql
+      - ./services/product-service/init.sql:/docker-entrypoint-initdb.d/init.sql
+    ports:
+      - "3306:3306"
+
+  product-service:
+    build: ./services/product-service
+    image: polyglot-shop/product-service:latest
+    container_name: product-service
+    depends_on:
+      - product-db
+    networks:
+      - polyglot-net
+    environment:
+      DB_HOST: product-db
+      DB_NAME: productdb
+      DB_USER: productuser
+      DB_PASS: productpass
+    ports:
+      - "8002:8002"
+
+  # ========== ORDER SERVICE ==========
+  order-db:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: order-db
+    networks:
+      - polyglot-net
+    environment:
+      SA_PASSWORD: "StrongPassw0rd!"
+      ACCEPT_EULA: "Y"
+    volumes:
+      - order-db-data:/var/opt/mssql
+      - ./services/order-service/init.sql:/docker-entrypoint-initdb.d/init.sql
+    ports:
+      - "1433:1433"
+
+  order-service:
+    build: ./services/order-service
+    image: polyglot-shop/order-service:latest
+    container_name: order-service
+    depends_on:
+      - order-db
+    networks:
+      - polyglot-net
+    environment:
+      DB_HOST: order-db
+      DB_NAME: orderdb
+      DB_USER: sa
+      DB_PASS: StrongPassw0rd!
+    ports:
+      - "8003:8003"
+
+  # ========== PAYMENT SERVICE ==========
+  payment-db:
+    image: redis:7-alpine
+    container_name: payment-db
+    ports:
+      - "6379:6379"
+    volumes:
+      - ./seed/payment/payments.json:/data/payments.json
+      - ./seed/payment/init-redis.sh:/docker-entrypoint-initdb.d/init-redis.sh
+
+  payment-service:
+    build: ./services/payment-service
+    image: polyglot-shop/payment-service:latest
+    container_name: payment-service
+    depends_on:
+      - payment-cache
+    networks:
+      - polyglot-net
+    environment:
+      REDIS_HOST: payment-cache
+    ports:
+      - "8004:8004"
+
+  # ========== INVENTORY SERVICE ==========
+  inventory-db:
+    image: postgres:15
+    container_name: inventory-db
+    networks:
+      - polyglot-net
+    environment:
+      POSTGRES_DB: inventorydb
+      POSTGRES_USER: inventoryuser
+      POSTGRES_PASSWORD: inventorypass
+    volumes:
+      - inventory-db-data:/var/lib/postgresql/data
+      - ./services/inventory-service/init.sql:/docker-entrypoint-initdb.d/init.sql
+    ports:
+      - "5432:5432"
+
+  inventory-service:
+    build: ./services/inventory-service
+    image: polyglot-shop/inventory-service:latest
+    container_name: inventory-service
+    depends_on:
+      - inventory-db
+    networks:
+      - polyglot-net
+    environment:
+      DB_HOST: inventory-db
+      DB_NAME: inventorydb
+      DB_USER: inventoryuser
+      DB_PASS: inventorypass
+    ports:
+      - "8005:8005"
+
+  # ========== SHIPPING SERVICE ==========
+  shipping-db:
+    image: mysql:8
+    container_name: shipping-db
+    networks:
+      - polyglot-net
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpass
+      MYSQL_DATABASE: shippingdb
+      MYSQL_USER: shippinguser
+      MYSQL_PASSWORD: shippingpass
+    volumes:
+      - shipping-db-data:/var/lib/mysql
+      - ./services/shipping-service/init.sql:/docker-entrypoint-initdb.d/init.sql
+    ports:
+      - "3307:3306"
+
+  shipping-service:
+    build: ./services/shipping-service
+    image: polyglot-shop/shipping-service:latest
+    container_name: shipping-service
+    depends_on:
+      - shipping-db
+    networks:
+      - polyglot-net
+    environment:
+      DB_HOST: shipping-db
+      DB_NAME: shippingdb
+      DB_USER: shippinguser
+      DB_PASS: shippingpass
+    ports:
+      - "8006:8006"
+
+volumes:
+  auth-db-data:
+  product-db-data:
+  order-db-data:
+  inventory-db-data:
+  shipping-db-data:

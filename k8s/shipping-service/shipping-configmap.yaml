@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: shipping-service-config
+  namespace: polyglot-shop
+data:
+  DB_HOST: shipping-db
+  DB_PORT: "3306"
+  DB_NAME: shippingdb
