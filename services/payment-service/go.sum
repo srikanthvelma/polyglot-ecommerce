@@ -1,0 +1,4 @@
+github.com/go-redis/redis/v8 v8.11.5 h1:gXXQeYm8lR7lMkQpDwXCRnykmkP75k+Pbw5K5KUsf5I=
+github.com/go-redis/redis/v8 v8.11.5/go.mod h1:ZpK/cX+Rl21wBwn2rn3cww8zfr1sJgXoFkIVYvG45+U=
+golang.org/x/net v0.23.0 h1:V6Q4i63kRcG8UykwT8c9krRm/NX+3bwyuL/OLkkRtwI=
+golang.org/x/net v0.23.0/go.mod h1:5K4K3PlrsuLkDc1IqowcyiK2h6tqU6JgxQXeRl2gNnk=
