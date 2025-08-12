@@ -3,7 +3,7 @@ import { Routes, Route } from 'react-router-dom';
 import Auth from './Auth';
 import Products from './Products';
 import Orders from './Orders';
-import Payments from './Payment';
+import Payments from './Payments';
 import Inventory from './Inventory';
 import Shipping from './Shipping';
 import NotFound from './NotFound';
