@@ -190,28 +190,28 @@ services:
 
 
   # ========== FRONTEND ==========
-    frontend:
-    build: ./services/frontend
-    image: polyglot-shop/frontend:latest
-    container_name: frontend
-    depends_on:
-      - auth-service
-      - product-service
-      - order-service
-      - payment-service
-      - inventory-service
-      - shipping-service
-    networks:
-      - polyglot-net
-    environment:
-      - REACT_APP_AUTH_URL=http://auth-service:8001
-      - REACT_APP_PRODUCT_URL=http://product-service:8002
-      - REACT_APP_ORDER_URL=http://order-service:8003
-      - REACT_APP_PAYMENT_URL=http://payment-service:8004
-      - REACT_APP_INVENTORY_URL=http://inventory-service:8005
-      - REACT_APP_SHIPPING_URL=http://shipping-service:8006
-    ports:
-      - "3000:3000"
+  frontend:
+  build: ./services/frontend
+  image: polyglot-shop/frontend:latest
+  container_name: frontend
+  depends_on:
+    - auth-service
+    - product-service
+    - order-service
+    - payment-service
+    - inventory-service
+    - shipping-service
+  networks:
+    - polyglot-net
+  environment:
+    - REACT_APP_AUTH_URL=http://auth-service:8001
+    - REACT_APP_PRODUCT_URL=http://product-service:8002
+    - REACT_APP_ORDER_URL=http://order-service:8003
+    - REACT_APP_PAYMENT_URL=http://payment-service:8004
+    - REACT_APP_INVENTORY_URL=http://inventory-service:8005
+    - REACT_APP_SHIPPING_URL=http://shipping-service:8006
+  ports:
+    - "3000:3000"
 
 volumes:
   auth-db-data:
