@@ -6,12 +6,13 @@ networks:
 services:
   # ========== AUTH SERVICE ==========
   auth-db:
-    image: mongo:6
+    image: mongo:7
     container_name: auth-db
     networks:
       - polyglot-net
     volumes:
       - auth-db-data:/data/db
+      - ./seed/auth/init-mongo.js:/docker-entrypoint-initdb.d/init-mongo.js:ro
     ports:
       - "27017:27017"
 
@@ -42,7 +43,7 @@ services:
       MYSQL_PASSWORD: productpass
     volumes:
       - product-db-data:/var/lib/mysql
-      - ./services/product-service/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./seed/product/products.sql:/docker-entrypoint-initdb.d/products.sql:ro
     ports:
       - "3306:3306"
 
@@ -64,18 +65,20 @@ services:
 
   # ========== ORDER SERVICE ==========
   order-db:
-    image: mcr.microsoft.com/mssql/server:2022-latest
+    image: postgres:16
     container_name: order-db
     networks:
       - polyglot-net
     environment:
-      SA_PASSWORD: "StrongPassw0rd!"
-      ACCEPT_EULA: "Y"
+      POSTGRES_DB: orderdb
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgrespass
+      
     volumes:
-      - order-db-data:/var/opt/mssql
-      - ./services/order-service/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - order-db-data:/var/lib/postgresql/data
+      - ./seed/order/orders.sql:/docker-entrypoint-initdb.d/orders.sql:ro
     ports:
-      - "1433:1433"
+      - "5433:5432"
 
   order-service:
     build: ./services/order-service
@@ -86,10 +89,9 @@ services:
     networks:
       - polyglot-net
     environment:
-      DB_HOST: order-db
-      DB_NAME: orderdb
-      DB_USER: sa
-      DB_PASS: StrongPassw0rd!
+      POSTGRES_DB: orderdb
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgrespass
     ports:
       - "8003:8003"
 
@@ -101,36 +103,42 @@ services:
       - "6379:6379"
     volumes:
       - ./seed/payment/payments.json:/data/payments.json
-      - ./seed/payment/init-redis.sh:/docker-entrypoint-initdb.d/init-redis.sh
+      - ./seed/payment/init-redis.sh:/docker-entrypoint-initdb.d/init-redis.sh:ro
+    command: [ "sh", "-c", "redis-server --daemonize yes && sleep 2 && sh /docker-entrypoint-initdb.d/init-redis.sh && tail -f /dev/null" ]
+    networks:
+      - polyglot-net
+
 
   payment-service:
     build: ./services/payment-service
     image: polyglot-shop/payment-service:latest
     container_name: payment-service
     depends_on:
-      - payment-cache
+      - payment-db
     networks:
       - polyglot-net
     environment:
-      REDIS_HOST: payment-cache
+      REDIS_HOST: payment-db
     ports:
       - "8004:8004"
 
   # ========== INVENTORY SERVICE ==========
   inventory-db:
-    image: postgres:15
+    image: mysql:8
     container_name: inventory-db
     networks:
       - polyglot-net
     environment:
-      POSTGRES_DB: inventorydb
-      POSTGRES_USER: inventoryuser
-      POSTGRES_PASSWORD: inventorypass
+      MYSQL_ROOT_PASSWORD: rootpass
+      MYSQL_DATABASE: inventorydb
+      MYSQL_USER: inventoryuser
+      MYSQL_PASSWORD: inventorypass
     volumes:
-      - inventory-db-data:/var/lib/postgresql/data
-      - ./services/inventory-service/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - inventory-db-data:/var/lib/mysql
+      - ./seed/inventory/inventory.sql:/docker-entrypoint-initdb.d/inventory.sql:ro
+    command: --default-authentication-plugin=mysql_native_password
     ports:
-      - "5432:5432"
+      - "3307:3306"
 
   inventory-service:
     build: ./services/inventory-service
@@ -150,20 +158,19 @@ services:
 
   # ========== SHIPPING SERVICE ==========
   shipping-db:
-    image: mysql:8
+    image: postgres:16
     container_name: shipping-db
     networks:
       - polyglot-net
     environment:
-      MYSQL_ROOT_PASSWORD: rootpass
-      MYSQL_DATABASE: shippingdb
-      MYSQL_USER: shippinguser
-      MYSQL_PASSWORD: shippingpass
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgrespass
+      POSTGRES_DB: shippingdb
     volumes:
-      - shipping-db-data:/var/lib/mysql
-      - ./services/shipping-service/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - shipping-db-data:/var/lib/postgresql/data
+      - ./seed/shipping/shipping.sql:/docker-entrypoint-initdb.d/shipping.sql:ro
     ports:
-      - "3307:3306"
+      - "5434:5432"
 
   shipping-service:
     build: ./services/shipping-service
