@@ -1,7 +1,7 @@
 import React from 'react';
 import { Box, CssBaseline } from '@mui/material';
-import Sidebar from './components/sidebar';
-import Router from './components/router';
+import Sidebar from './components/Sidebar';
+import Router from './components/Router';
 
 export default function App() {
   return (

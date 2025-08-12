@@ -1,11 +1,11 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
-import auth from './auth';
-import products from './Products';
-import orders from './Orders';
-import payments from './Payment';
-import inventory from './inventory';
-import shipping from './shipping';
+import Auth from './Auth';
+import Products from './Products';
+import Orders from './Orders';
+import Payments from './Payment';
+import Inventory from './Inventory';
+import Shipping from './Shipping';
 import NotFound from './NotFound';
 
 export default function Router() {

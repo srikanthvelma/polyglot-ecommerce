@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Typography, TableContainer, Table, TableHead, TableRow, TableCell, TableBody, Paper, Alert } from '@mui/material';
-import Loading from './loading';
+import Loading from './Loading';
 
 const PAYMENT_URL = process.env.REACT_APP_PAYMENT_URL;
 
