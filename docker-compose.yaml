@@ -191,7 +191,7 @@ services:
 
   # ========== FRONTEND ==========
     frontend:
-    build: ./frontend
+    build: ./services/frontend
     image: polyglot-shop/frontend:latest
     container_name: frontend
     depends_on:
