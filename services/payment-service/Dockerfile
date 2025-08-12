@@ -1,8 +1,10 @@
 FROM golang:1.21-alpine AS builder
 WORKDIR /app
+
+COPY go.mod go.sum ./
 RUN go mod tidy
 RUN go mod download
-COPY go.mod go.sum ./
+
 COPY . .
 RUN go build -o payment-service
 
