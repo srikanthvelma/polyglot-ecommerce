@@ -1,0 +1,34 @@
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs/
+
+# Editor folders
+.vscode/
+.idea/
+
+# Node.js
+**/node_modules/
+**/build/
+**/dist/
+
+# Python
+**/__pycache__/
+**/*.py[cod]
+**/venv/
+**/.env
+**/.env.*
+
+# Docker
+**/docker-compose.override.yml
+
+# Env files (for all services)
+*.env
+.env.*
+
+# Other
+*.swp
+
